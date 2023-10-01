@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import Providers from '@/components/Providers';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} bg-zinc-50 dark:bg-zinc-900`}>
         <ToastContainer />
         <Providers>{children}</Providers>
+        <Footer />
       </body>
     </html>
   );
