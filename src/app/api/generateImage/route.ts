@@ -1,17 +1,31 @@
-import openai from "@/openai";
-import { NextResponse } from "next/server";
-import { ImagesResponse } from "openai/resources/images.mjs";
+import { allowedResolutions } from '@/lib/globals/resolutions';
+import openai from '@/openai';
+import { NextResponse } from 'next/server';
+import { ImagesResponse } from 'openai/resources/images.mjs';
 
 export async function POST(req: Request) {
-  const { prompt } = await req.json();
+  try {
+    const { prompt, resolution } = await req.json();
 
-  const response: ImagesResponse = await openai.images.generate({
-    prompt,
-    n: 1,
-    size: "256x256",
-  });
+    if (!allowedResolutions.includes(resolution) || prompt.length <= 0) {
+      return NextResponse.json(
+        {
+          message: 'Invalid inputs. Please enter a prompt and select a resolution',
+        },
+        { status: 400 },
+      );
+    }
 
-  const image_url = response["data"][0]["url"];
-  console.log("image_url: ", image_url);
-  return NextResponse.json(image_url);
+    const apiResponse: ImagesResponse = await openai.images.generate({
+      prompt,
+      n: 1,
+      size: resolution,
+    });
+
+    const imageURL = apiResponse['data'][0]['url'];
+    return NextResponse.json({ imageURL, message: 'Image generation successful.' }, { status: 200 });
+  } catch (err) {
+    const message = 'Request failed. Please try again later.';
+    return NextResponse.json({ message }, { status: 400 });
+  }
 }
