@@ -1,4 +1,4 @@
-import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 import Providers from '@/components/Providers';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -13,13 +13,16 @@ export const metadata: Metadata = {
   description: 'Created with Next.js 13, OpenAI, TailwindCSS, and more.',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children, authModal }: { children: React.ReactNode; authModal: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-zinc-50 dark:bg-zinc-900`}>
-        <ToastContainer />
-        <Providers>{children}</Providers>
-        <Footer />
+      <body className={`min-h-screen ${inter.className} bg-zinc-50 dark:bg-zinc-900`}>
+        <Providers>
+          <ToastContainer />
+          <Navbar />
+          {authModal}
+          {children}
+        </Providers>
       </body>
     </html>
   );
