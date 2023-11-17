@@ -67,7 +67,7 @@ export async function POST(req: Request) {
 
     await prisma.image.create({
       data: {
-        accessUrl: `${process.env.AWS_CLOUDFRONT_PREFIX}/${filename}`,
+        accessUrl: `https://${process.env.AWS_CLOUDFRONT_PREFIX}/${filename}`,
         prompt,
         creatorId: session.user.id,
         timestamp,
