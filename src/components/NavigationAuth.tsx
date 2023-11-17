@@ -10,9 +10,11 @@ type NavigationAuthProps = {
 
 const NavigationAuth = ({ session }: NavigationAuthProps) => {
   return (
-    <div className="flex flex-row gap-4 items-center">
+    <div className="flex flex-row items-center mx-4">
       {session ? (
-        <Button onClick={() => signOut()}>Sign Out</Button>
+        <Button onClick={() => signOut()} className="font-semibold hover:bg-zinc-400 dark:hover:bg-zinc-600">
+          Sign Out
+        </Button>
       ) : (
         <Button href="/sign-in" as={Link} color="primary" className="font-semibold hover:bg-blue-500">
           Sign In
