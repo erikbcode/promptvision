@@ -71,10 +71,11 @@ model VerificationToken {
 model Image {
   id        String   @id @default(cuid())
   prompt    String
-  url       String
   createdAt DateTime @default(now())
   creator   User     @relation(fields: [creatorId], references: [id])
   creatorId String
+  timestamp BigInt
+  accessUrl String
 
   @@index([creatorId])
 }
