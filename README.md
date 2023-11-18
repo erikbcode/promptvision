@@ -9,7 +9,23 @@ Please follow the steps below to run PromptVision on your device. Due to the cos
 Open your terminal and run the following command:
 
 ```bash
-git clone (https://github.com/erikbcode/promptvision.git)
+git clone https://github.com/erikbcode/promptvision.git
+```
+
+## Navigate to the Project Directory
+
+Change into the project directory using the following command:
+
+```bash
+cd promptvision
+```
+
+## Install Dependencies
+
+Ensure that you have [`bun`](https://bun.sh) installed.
+
+```bash
+bun install
 ```
 
 ## Environment Variables
@@ -34,17 +50,17 @@ To run PromptVision on your device, you must set the required Environment Variab
 
 - **AWS_CLOUDFRONT_PREFIX:** This prefix is used in conjunction with CloudFront, forming the complete URL for efficient querying and delivery of images.
 
+## Initialize Prisma Client
+
+```bash
+prisma generate
+```
+
 - ## Running the Application
 
 To run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
 bun dev
 ```
 
